@@ -71,6 +71,21 @@ class TestLinkedList(unittest.TestCase):
         with self.assertRaises(LookupError):
             linked_list.find("Smith")
 
+    def test_reverse(self):
+        names = ("Jose", "1234", 2), ("Rolf", "2345", 3), ("Anna", "3456", 7)
+
+        nodes = [Node(name, matric, year) for name, matric, year in names]
+
+        linked_list = LinkedList()
+
+        for node in nodes:
+            linked_list.add_to_list(node)
+
+        linked_list.reverse_iter()
+        self.assertEqual(linked_list.get_root().name, "Jose")
+        linked_list.reverse_recursive()
+        self.assertEqual(linked_list.get_root().name, "Anna")
+
 
 if __name__ == "__main__":
     unittest.main()

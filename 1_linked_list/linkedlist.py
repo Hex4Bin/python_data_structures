@@ -35,3 +35,37 @@ class LinkedList:
                 return marker
             marker = marker.get_next()
         raise LookupError("Can't find the name.")
+
+    def reverse_iter(self):
+        """
+        Reverse the LinkedList (iterative method).
+        Time Complexity: O(n)
+        Space Complexity: O(1)
+        """
+        current = self.get_root()
+        previous = None
+        while current:
+            next_node = current.get_next()
+            current.set_next(previous)
+            previous = current
+            current = next_node
+        self.__root = previous
+
+    def reverse_recursive(self):
+        """
+        Reverse the LinkedList (recursive method).
+        Time Complexity: O(n)
+        Space Complexity: O(1)
+        """
+        def _reverse_recursive(current, previous):
+            """ Helper method for recursion. """
+            if not current:
+                return previous
+            else:
+                next_node = current.get_next()
+                current.set_next(previous)
+                previous = current
+                current = next_node
+                return _reverse_recursive(current, previous)
+
+        self.__root = _reverse_recursive(current=self.__root, previous=None)
